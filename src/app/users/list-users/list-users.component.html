@@ -1,0 +1,10 @@
+<h1 style="text-align:center" class="mat-display-2">List Users</h1>
+
+<div class="container">
+  <div *ngIf="isLoading" style="text-align: center">.....Loading.....</div>
+  <div *ngIf="!isLoading" fxLayoutGap="15px grid" fxLayout="row wrap">
+    <div *ngFor="let item of userList" fxFlex="25%" fxFlex.xs="100%" style="text-align: center">
+      <app-user [user]="item"></app-user>
+    </div>
+  </div>
+</div>
