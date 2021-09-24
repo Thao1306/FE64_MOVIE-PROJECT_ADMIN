@@ -6,15 +6,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import { HttpClientModule } from '@angular/common/http';
-
-
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FilmsModule } from './films/films.module';
+import { TokenInterceptor } from './token.interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,9 +21,11 @@ import { HttpClientModule } from '@angular/common/http';
     UsersModule,
     HttpClientModule,
     BrowserAnimationsModule,
-
+    FilmsModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

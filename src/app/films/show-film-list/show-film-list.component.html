@@ -1,0 +1,80 @@
+<div class="container">
+  <form class="search-container" (submit)="handleSearchFilm()">
+    <mat-form-field
+      class="example-full-width"
+      color="warn"
+      appearance="outline"
+    >
+      <mat-label>Nhập mã phim hoặc tên phim</mat-label>
+      <input
+        color="warn"
+        matInput
+        #input="ngModel"
+        placeholder="Nhập mã phim hoặc tên phim"
+        ngModel
+        name="searchKey"
+      />
+    </mat-form-field>
+    <button mat-raised-button color="warn">Tìm kiếm</button>
+  </form>
+  <div *ngIf="isLoading; else listFilmTable" class="container text-center my-5">
+    <div class="spinner-border text-danger" role="status"></div>
+  </div>
+  <ng-template #listFilmTable>
+    <table class="table">
+      <thead class="text-center">
+        <tr>
+          <th>STT</th>
+          <th>Hình ảnh</th>
+          <th>Mã phim</th>
+          <th>Tên phim</th>
+          <th>Mô tả</th>
+          <th>Ngày chiếu</th>
+          <th>Hiện trạng</th>
+          <th>Xử lý</th>
+        </tr>
+      </thead>
+
+      <p
+        *ngIf="notFoundFilm; else contentFilm"
+        class="text-danger text-center mt-3"
+      >
+        Không tìm thấy phim
+      </p>
+
+      <ng-template #contentFilm>
+        <tbody class="text-left bodyTable">
+          <tr *ngFor="let film of filmList; let order = index">
+            <td>{{ order + 1 + (filmPagination.currentPage - 1) * 10 }}</td>
+            <td class="text-center">
+              <img [src]="film.hinhAnh" width="25%" />
+            </td>
+            <td>{{ film.maPhim }}</td>
+            <td>{{ film.tenPhim }}</td>
+            <td>
+              <span>
+                {{ film.moTa }}
+              </span>
+            </td>
+            <td>{{ film.ngayKhoiChieu }}</td>
+            <td *ngIf="film.dangChieu">Đang chiếu</td>
+            <td *ngIf="!film.dangChieu">Sắp chiếu</td>
+            <td>
+              <a class="editBtn" href="/editfilm/{{film.maPhim}}" mat-raised-button target="blank">Sửa</a>
+              <a mat-raised-button color="warn">Xóa</a>
+            </td>
+          </tr>
+        </tbody>
+      </ng-template>
+    </table>
+    <mat-paginator
+      color="warn"
+      [length]="filmPagination.totalCount"
+      [pageSize]="10"
+      aria-label="Select page"
+      (page)="changePage($event)"
+      showFirstLastButtons="true"
+    >
+    </mat-paginator>
+  </ng-template>
+</div>

@@ -1,8 +1,46 @@
 <mat-list role="list">
   <mat-list-item role="listitem">
-    <a class="title" href="create">Add user</a>
+    <div class="listCollapse">
+      <div class="collapseControls">
+        <a
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseUser"
+          aria-expanded="false"
+          aria-controls="collapseUser"
+        >
+          Quản lý người dùng
+        </a>
+      </div>
+      <div class="collapse" id="collapseUser">
+        <div class="collapseShowContent">
+          <a href="list">Danh sách người dùng</a>
+          <a href="create">Thêm người dùng</a>
+        </div>
+      </div>
+    </div>
   </mat-list-item>
   <mat-list-item role="listitem">
-    <a class="title" href="list">User management</a>
+    <div class="listCollapse">
+      <div class="collapseControls">
+        <a
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseFilm"
+          aria-expanded="false"
+          aria-controls="collapseFilm"
+        >
+          Quản lý phim
+        </a>
+      </div>
+      <div class="collapse" id="collapseFilm">
+        <div class="collapseShowContent">
+          <a class="nav-link active" aria-current="page" href="showfilm"
+            >Danh sách phim</a
+          >
+          <a class="nav-link" href="addfilm">Thêm phim</a>
+        </div>
+      </div>
+    </div>
   </mat-list-item>
 </mat-list>

@@ -1,7 +1,25 @@
 .sidebar {
   max-width: 500px;
 }
-.title {
-  text-decoration: none;
+
+.mat-list-base .mat-list-item,
+.mat-list-base .mat-list-option {
+  height: auto;
+}
+.collapseControls a {
+  margin: 20px 0;
+}
+.collapseShowContent {
+  display: flex;
+  flex-direction: column;
+}
+.collapseShowContent a {
+  padding: 10px 20px;
+}
+.listCollapse a {
   color: black;
+  text-decoration: none;
+}
+.listCollapse a:hover {
+  color: #f44336;
 }

@@ -1,0 +1,16 @@
+.mat-form-field {
+  width: -webkit-fill-available;
+  padding-right: 10px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+
+}
+.search-container button {
+  margin-bottom: 1.34375em;
+}
+.bodyTable td .editBtn:hover {
+  color: #f44336;
+}
