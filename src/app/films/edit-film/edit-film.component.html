@@ -1,1 +1,133 @@
-<p>edit-film works!</p>
+<div class="container editMovieBlock">
+  <h1 class="fw-bold">CHỈNH SỬA THÔNG TIN PHIM</h1>
+  <form
+    #editMovie="ngForm"
+    (submit)="handleSubmit()"
+    class="formAddMovie"
+    touched
+  >
+    <mat-form-field class="form-group" appearance="outline" color="warn">
+      <mat-label>Mã phim</mat-label>
+      <input
+        #maPhim="ngModel"
+        matInput
+        name="maPhim"
+        ngModel
+        placeholder="mã phim"
+        disabled
+        [value]="filmInfo?.maPhim"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-group" color="warn">
+      <mat-label>Tên phim</mat-label>
+      <input
+        #tenPhim="ngModel"
+        matInput
+        name="tenPhim"
+        [(ngModel)]="filmInfo.tenPhim"
+        required
+      />
+      <mat-error *ngIf="tenPhim.errors?.required"
+        >Vui lòng nhập tên phim</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-group" color="warn">
+      <mat-label>Trailer</mat-label>
+      <input
+        #trailer="ngModel"
+        matInput
+        name="trailer"
+        required
+        [(ngModel)]="filmInfo.trailer"
+      />
+
+      <mat-error *ngIf="trailer.errors?.required"
+        >Vui lòng nhập link nhúng (embed)</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-group" color="warn">
+      <mat-label>Mô tả</mat-label>
+      <input
+        #moTa="ngModel"
+        matInput
+        name="moTa"
+        required
+        [(ngModel)]="filmInfo.moTa"
+      />
+      <mat-error *ngIf="moTa.errors?.required">Vui lòng nhập mô tả</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-group" color="warn">
+      <mat-label>Chọn ngày khởi chiếu</mat-label>
+      <input
+        #ngayKhoiChieu="ngModel"
+        matInput
+        [matDatepicker]="picker"
+        name="ngayKhoiChieu"
+        required
+        [(ngModel)]="filmInfo.ngayKhoiChieu"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker">
+        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="ngayKhoiChieu.errors?.required"
+        >Vui lòng nhập ngày khởi chiếu</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-group" color="warn">
+      <mat-label>Đánh giá</mat-label>
+      <input
+        #danhGia="ngModel"
+        matInput
+        name="danhGia"
+        required
+        pattern="([1-9]|10)"
+        [(ngModel)]="filmInfo.danhGia"
+      />
+      <mat-error *ngIf="danhGia.errors?.required"
+        >Vui lòng nhập đánh giá</mat-error
+      >
+      <mat-error *ngIf="danhGia.errors?.pattern"
+        >Mã phim phải là chữ số từ 1-10</mat-error
+      >
+    </mat-form-field>
+
+    <div class="form-group">
+      <mat-slide-toggle
+        #hot="ngModel"
+        name="hot"
+        color="warn"
+        [(ngModel)]="filmInfo.hot"
+        >Hot</mat-slide-toggle
+      >
+      <mat-slide-toggle
+        #dangChieu="ngModel"
+        name="dangChieu"
+        color="warn"
+        style="margin-left: 10px"
+        [(ngModel)]="filmInfo.dangChieu"
+        >Đang chiếu</mat-slide-toggle
+      >
+    </div>
+
+    <div class="imgInfo">
+      <img [src]="filmInfo.hinhAnh" width="25%" />
+      <input
+        #hinhAnh="ngModel"
+        type="file"
+        name="hinhAnh"
+        (change)="handleChangeFile($event)"
+        ngModel
+      />
+    </div>
+
+    <div class="text-center">
+      <button mat-raised-button color="warn">Cập nhật thông tin phim</button>
+    </div>
+  </form>
+</div>

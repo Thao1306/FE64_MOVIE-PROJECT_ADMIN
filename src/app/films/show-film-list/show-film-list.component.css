@@ -6,10 +6,13 @@
 .search-container {
   display: flex;
   align-items: center;
-
 }
 .search-container button {
   margin-bottom: 1.34375em;
+}
+.bodyTable td .editBtn {
+  cursor: pointer;
+  color: black;
 }
 .bodyTable td .editBtn:hover {
   color: #f44336;

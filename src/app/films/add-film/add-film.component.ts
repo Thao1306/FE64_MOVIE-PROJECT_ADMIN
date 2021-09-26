@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
+import { Router } from '@angular/router';
 import * as dayjs from 'dayjs';
+import { Subscription } from 'rxjs';
 import { FilmApiService } from 'src/app/services/film-api.service';
 
 @Component({
@@ -8,11 +10,14 @@ import { FilmApiService } from 'src/app/services/film-api.service';
   templateUrl: './add-film.component.html',
   styleUrls: ['./add-film.component.css'],
 })
-export class AddFilmComponent implements OnInit {
+export class AddFilmComponent implements OnInit, OnDestroy {
   @ViewChild('addMovie') addFormMovie!: NgForm;
   @ViewChild('hinhAnh') hinh!: NgModel;
+
   files: File | undefined;
-  constructor(private filmApiSv: FilmApiService) {}
+  addMovieSubscription: Subscription | undefined;
+
+  constructor(private filmApiSv: FilmApiService, private router: Router) {}
 
   handleSubmit = () => {
     if (this.addFormMovie.form.status === 'INVALID') {
@@ -34,13 +39,15 @@ export class AddFilmComponent implements OnInit {
         formData.append(key, formMovie[key]);
       }
 
-      this.filmApiSv.addMovie(formData).subscribe(
+      this.addMovieSubscription = this.filmApiSv.addMovie(formData).subscribe(
         (res) => {
           console.log(res);
           alert('Thêm phim thành công');
+          this.router.navigate(['/show-film'])
         },
         (err) => {
           console.log(err);
+          alert('Thêm phim không thành công');
         }
       );
     }
@@ -50,4 +57,7 @@ export class AddFilmComponent implements OnInit {
     this.files = event.target.files[0];
   };
   ngOnInit(): void {}
+  ngOnDestroy() {
+    this.addMovieSubscription?.unsubscribe;
+  }
 }

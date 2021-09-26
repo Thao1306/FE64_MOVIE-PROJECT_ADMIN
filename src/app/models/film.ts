@@ -3,7 +3,7 @@ export interface IFilm {
   tenPhim: string;
   biDanh: string;
   trailer: string;
-  hinhAnh: string;
+  hinhAnh: string | File;
   moTa: string;
   ngayKhoiChieu: string;
   danhGia: number;
@@ -12,9 +12,11 @@ export interface IFilm {
   sapChieu: boolean;
 }
 export interface IFilmPagination {
-    currentPage: number,
-    count: number,
-    totalPages: number,
-    totalCount: number,
-    items?: IFilm[]
-} 
+  currentPage: number;
+  count: number;
+  totalPages: number;
+  totalCount: number;
+  items?: IFilm[];
+}
+
+

@@ -1,0 +1,14 @@
+.createShowtimeBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 30px 0;
+}
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
+  justify-content: center;
+}
+
+.mat-form-field {
+  display: block;
+}

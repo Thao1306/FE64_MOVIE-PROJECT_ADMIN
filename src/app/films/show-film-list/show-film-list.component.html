@@ -1,4 +1,5 @@
 <div class="container">
+  <h1 class="fw-bold text-center mt-5">DANH SÁCH PHIM</h1>
   <form class="search-container" (submit)="handleSearchFilm()">
     <mat-form-field
       class="example-full-width"
@@ -60,13 +61,29 @@
             <td *ngIf="film.dangChieu">Đang chiếu</td>
             <td *ngIf="!film.dangChieu">Sắp chiếu</td>
             <td>
-              <a class="editBtn" href="/editfilm/{{film.maPhim}}" mat-raised-button target="blank">Sửa</a>
-              <a mat-raised-button color="warn">Xóa</a>
+              <div class="d-flex">
+                <a
+                  class="editBtn"
+                  href="/edit-film/{{ film.maPhim }}"
+                  target="blank"
+                  ><mat-icon>edit</mat-icon></a
+                >
+                <a class="editBtn" (click)="handleDelete(film.maPhim)"
+                  ><mat-icon>delete_outline</mat-icon></a
+                >
+                <a
+                  class="editBtn"
+                  href="/create-show-time/{{ film.maPhim }}"
+                  target="blank"
+                  ><mat-icon>date_range</mat-icon></a
+                >
+              </div>
             </td>
           </tr>
         </tbody>
       </ng-template>
     </table>
+
     <mat-paginator
       color="warn"
       [length]="filmPagination.totalCount"

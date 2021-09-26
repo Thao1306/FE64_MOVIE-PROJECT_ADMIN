@@ -8,6 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddFilmComponent } from './films/add-film/add-film.component';
 import { ShowFilmListComponent } from './films/show-film-list/show-film-list.component';
 import { EditFilmComponent } from './films/edit-film/edit-film.component';
+import { CreateShowtimesFilmComponent } from './films/create-showtimes-film/create-showtimes-film.component';
 
 const routes: Routes = [
   { path: 'create', component: AddUserComponent },
@@ -15,9 +16,10 @@ const routes: Routes = [
   { path: 'list', component: ListUsersComponent },
   { path: 'delete/:id', component: DeleteUserComponent },
   { path: 'edit/:id', component: EditUserComponent },
-  { path: 'addfilm', component: AddFilmComponent },
-  { path: 'showfilm', component: ShowFilmListComponent },
-  { path: 'editfilm/:id', component: EditFilmComponent },
+  { path: 'add-film', component: AddFilmComponent },
+  { path: 'show-film', component: ShowFilmListComponent },
+  { path: 'edit-film/:id', component: EditFilmComponent },
+  { path: 'create-show-time/:id', component: CreateShowtimesFilmComponent },
 ];
 
 @NgModule({
