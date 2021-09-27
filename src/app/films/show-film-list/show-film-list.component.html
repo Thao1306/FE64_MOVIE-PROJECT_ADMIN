@@ -62,19 +62,13 @@
             <td *ngIf="!film.dangChieu">Sắp chiếu</td>
             <td>
               <div class="d-flex">
-                <a
-                  class="editBtn"
-                  href="/edit-film/{{ film.maPhim }}"
-                  target="blank"
+                <a class="editBtn" href="/edit-film/{{ film.maPhim }}"
                   ><mat-icon>edit</mat-icon></a
                 >
                 <a class="editBtn" (click)="handleDelete(film.maPhim)"
                   ><mat-icon>delete_outline</mat-icon></a
                 >
-                <a
-                  class="editBtn"
-                  href="/create-show-time/{{ film.maPhim }}"
-                  target="blank"
+                <a class="editBtn" href="/create-show-time/{{ film.maPhim }}"
                   ><mat-icon>date_range</mat-icon></a
                 >
               </div>

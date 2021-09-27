@@ -44,7 +44,6 @@ export class CreateShowtimesFilmComponent implements OnInit, OnDestroy {
       .fetchCinemaSystem(idCinema)
       .subscribe(
         (res) => {
-          console.log(res);
           this.showTime = res.content;
         },
         (err) => {
@@ -67,11 +66,11 @@ export class CreateShowtimesFilmComponent implements OnInit, OnDestroy {
         'DD/MM/YYYY hh:mm:ss'
       ),
     };
+
     this.createShowTimeFilmSubscription = this.cinemaApiSv
       .createShowTimeFilm(this.showTimeModel)
       .subscribe(
         (res) => {
-          console.log(res);
           alert('Tạo lịch chiếu thành công');
           this.router.navigate(['/show-film']);
         },

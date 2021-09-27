@@ -23,18 +23,19 @@
         <input
           #ngayKhoiChieu="ngModel"
           matInput
-          [matDatepicker]="picker"
+         
           ngModel
           name="ngayChieuGioChieu"
           required
+          type="datetime-local"
         />
-        <mat-datepicker-toggle matSuffix [for]="picker">
+        <!-- <mat-datepicker-toggle matSuffix [for]="picker">
           <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
         </mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="ngayKhoiChieu.errors?.required"
           >Vui lòng nhập ngày khởi chiếu</mat-error
-        >
+        > -->
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="form-group" color="warn">
@@ -73,4 +74,8 @@
       </div>
     </form>
   </mat-expansion-panel>
+
+ 
+
+
 </div>

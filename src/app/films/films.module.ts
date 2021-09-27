@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogContentDeleteFilmComponent } from './show-film-list/dialog-content-delete-film/dialog-content-delete-film.component';
 import { CreateShowtimesFilmComponent } from './create-showtimes-film/create-showtimes-film.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatNativeDateModule,
     MatIconModule,
     MatDialogModule,
-    MatExpansionModule
+    MatExpansionModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule
   ],
 })
 export class FilmsModule {}
