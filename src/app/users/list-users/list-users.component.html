@@ -1,10 +1,51 @@
-<h1 style="text-align:center" class="mat-display-2">List Users</h1>
-
 <div class="container">
-  <div *ngIf="isLoading" style="text-align: center">.....Loading.....</div>
-  <div *ngIf="!isLoading" fxLayoutGap="15px grid" fxLayout="row wrap">
-    <div *ngFor="let item of userList" fxFlex="25%" fxFlex.xs="100%" style="text-align: center">
-      <app-user [user]="item"></app-user>
-    </div>
+  <form class="search-container" (submit)="handleSearchUser()">
+    <mat-form-field class="example-full-width" color="warn" appearance="outline">
+      <mat-label>Nhập tên tài khoản</mat-label>
+      <input color="warn" matInput #input="ngModel" placeholder="Nhập tên tài khoản" ngModel name="searchKey" />
+    </mat-form-field>
+    <button mat-raised-button color="warn">Tìm kiếm</button>
+  </form>
+  <div *ngIf="isLoading; else listUserTable" class="container text-center my-5">
+    <div class="spinner-border text-danger" role="status"></div>
   </div>
+  <ng-template #listUserTable>
+    <table class="table">
+      <thead class="text-center">
+        <tr>
+          <th>STT</th>
+          <th>Tài khoản</th>
+          <th>Họ tên</th>
+          <th>Email</th>
+          <th>Số điện thoại</th>
+          <th>Mã người dùng</th>
+          <th>Xử lý</th>
+        </tr>
+      </thead>
+
+      <p *ngIf="notFoundUser; else contentUser" class="text-danger text-center mt-3">
+        Không tìm thấy tài khoản
+      </p>
+
+      <ng-template #contentUser>
+        <tbody class="text-left bodyTable">
+          <tr *ngFor="let user of userList; let order = index">
+            <td>{{ order + 1 + (userPagination.currentPage - 1) * 10 }}</td>
+            <td>{{ user.taiKhoan }}</td>
+            <td>{{ user.hoTen }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.soDt }}</td>
+            <td>{{ user.maLoaiNguoiDung}}</td>
+            <td>
+              <a class="editBtn" href="/edit-user/{{user.taiKhoan}}" mat-raised-button target="blank">Sửa</a>
+              <a class="deleteBtn " (click)="handleDelete(user.taiKhoan)" mat-raised-button target="blank">Xóa</a>
+            </td>
+          </tr>
+        </tbody>
+      </ng-template>
+    </table>
+    <mat-paginator color="warn" [length]="userPagination.totalCount" [pageSize]="10" aria-label="Select page"
+      (page)="changePage($event)" showFirstLastButtons="true">
+    </mat-paginator>
+  </ng-template>
 </div>

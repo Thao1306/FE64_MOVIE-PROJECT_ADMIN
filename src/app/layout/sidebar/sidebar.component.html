@@ -2,20 +2,15 @@
   <mat-list-item role="listitem">
     <div class="listCollapse">
       <div class="collapseControls">
-        <a
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseUser"
-          aria-expanded="false"
-          aria-controls="collapseUser"
-        >
+        <a type="button" data-bs-toggle="collapse" data-bs-target="#collapseUser" aria-expanded="false"
+          aria-controls="collapseUser">
           Quản lý người dùng
         </a>
       </div>
       <div class="collapse" id="collapseUser">
         <div class="collapseShowContent">
-          <a href="list">Danh sách người dùng</a>
-          <a href="create">Thêm người dùng</a>
+          <a class="nav-link active" aria-current="page" href="list-users">Danh sách người dùng </a>
+          <a class="nav-link" href="add-user">Thêm người dùng</a>
         </div>
       </div>
     </div>
@@ -23,21 +18,14 @@
   <mat-list-item role="listitem">
     <div class="listCollapse">
       <div class="collapseControls">
-        <a
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseFilm"
-          aria-expanded="false"
-          aria-controls="collapseFilm"
-        >
+        <a type="button" data-bs-toggle="collapse" data-bs-target="#collapseFilm" aria-expanded="false"
+          aria-controls="collapseFilm">
           Quản lý phim
         </a>
       </div>
       <div class="collapse" id="collapseFilm">
         <div class="collapseShowContent">
-          <a class="nav-link active" aria-current="page" href="show-film"
-            >Danh sách phim</a
-          >
+          <a class="nav-link active" aria-current="page" href="show-film">Danh sách phim</a>
           <a class="nav-link" href="add-film">Thêm phim</a>
         </div>
       </div>
