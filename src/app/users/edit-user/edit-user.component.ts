@@ -8,18 +8,18 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
-  styleUrls: ['./edit-user.component.css']
+  styleUrls: ['./edit-user.component.css'],
 })
 export class EditUserComponent implements OnInit {
   @ViewChild('editUser') editUser!: NgForm;
 
   idUser: string = '';
   userInfo: IUser = {
-    maNhom:',',
+    maNhom: ',',
     taiKhoan: '',
     hoTen: '',
     email: '',
-    soDt: '',
+    soDT: '',
     matKhau: '',
     maLoaiNguoiDung: '',
   };
@@ -38,15 +38,14 @@ export class EditUserComponent implements OnInit {
     console.log(this.userInfo);
     if (this.editUser.form.invalid) {
       alert('Thông tin bắt buộc không được để trống');
-    }
-    else {
-        this.userInfo = { ...this.userInfo };
+    } else {
+      this.userInfo = { ...this.userInfo };
       const newUser: IUser | any = { ...this.userInfo };
 
       this.editUserSubscription = this.userApiSv.editUser(newUser).subscribe(
         (res) => {
           alert('Chỉnh sửa người dùng thành công');
-          this.router.navigate(['/list-users'])
+          this.router.navigate(['/list-users']);
         },
         (err) => {
           console.log(err);
@@ -61,7 +60,8 @@ export class EditUserComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.idUser = (this.activated.snapshot.params.id);
+    this.idUser = this.activated.snapshot.params.id;
+
     this.fetchUserInfoSubscription = this.userApiSv
       .fetchUserInfo(this.idUser)
       .subscribe(

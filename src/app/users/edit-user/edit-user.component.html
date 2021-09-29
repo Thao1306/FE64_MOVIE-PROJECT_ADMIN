@@ -19,7 +19,7 @@
 
     <mat-form-field appearance="outline" class="form-group" color="warn">
       <mat-label>Email</mat-label>
-      <input #email="ngModel" matInput name="email" required [(ngModel)]="userInfo.email" />
+      <input #email="ngModel" matInput name="email" required email [(ngModel)]="userInfo.email" />
       <mat-error *ngIf="email.errors?.required">Vui lòng nhập email</mat-error>
       <mat-error *ngIf="email.errors?.email">Email không đúng định dạng</mat-error>
     </mat-form-field>
@@ -32,7 +32,7 @@
 
     <mat-form-field appearance="outline" class="form-group" color="warn">
       <mat-label>Số điện thoại</mat-label>
-      <input #phone="ngModel" matInput required pattern="^[0-9]+$" name="soDt" required [(ngModel)]="userInfo.soDt" />
+      <input #phone="ngModel" matInput required pattern="^[0-9]+$" name="soDt" required [(ngModel)]="userInfo.soDT" />
       <mat-error *ngIf="phone.errors?.required">Vui lòng nhập số điện thoại</mat-error>
       <mat-error *ngIf="phone.errors?.pattern">Vui lòng nhập chữ số</mat-error>
     </mat-form-field>

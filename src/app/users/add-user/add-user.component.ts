@@ -39,7 +39,7 @@ export class AddUserComponent implements OnInit {
       if (this.addFormUser.form.status === 'INVALID') {
         alert('Nhập đủ thông tin mới được thêm người dùng');
       }
-      const newUser = { ...this.addFormUser.value, UserId: ''};
+      const newUser = { ...this.addFormUser.value, maNhom: "GP01"};
       this.userApiSv.addUser(newUser).subscribe(
         (res) => {
           console.log(res);

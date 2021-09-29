@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class CreateShowtimesFilmComponent implements OnInit, OnDestroy {
   @ViewChildren('showtimeForm') showtimeFormList!: any;
+
   listCinema: ICinema[] | undefined;
   constructor(
     private activated: ActivatedRoute,

@@ -23,12 +23,8 @@ export class UserAPIService {
 
   fetchUserInfo = (id: string): Observable<any> => {
     return this.http.post(
-      'https://movienew.cybersoft.edu.vn/api/QuanLyNguoiDung/LayThongTinNguoiDung',
-      {
-        params: {
-          taiKhoan: id,
-        },
-      }
+      `https://movienew.cybersoft.edu.vn/api/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${id}`,
+      null
     );
   };
 
@@ -56,5 +52,4 @@ export class UserAPIService {
       }
     );
   };
-
 }

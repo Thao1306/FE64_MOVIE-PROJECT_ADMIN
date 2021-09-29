@@ -3,7 +3,8 @@ export interface IUser {
   taiKhoan: string;
   hoTen: string;
   email: string;
-  soDt: string;
+  soDt?: string;
+  soDT?: string;
   matKhau: string;
   maLoaiNguoiDung: string;
 }

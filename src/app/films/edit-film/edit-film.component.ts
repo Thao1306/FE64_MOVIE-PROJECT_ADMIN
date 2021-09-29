@@ -13,7 +13,6 @@ import { Subscription } from 'rxjs';
 })
 export class EditFilmComponent implements OnInit, OnDestroy {
   @ViewChild('editMovie') editMovie!: NgForm;
-  @ViewChild('hinhAnh') hinhAnh!: NgModel;
 
   idFilm: number = 0;
   filmInfo: IFilm = {
@@ -65,7 +64,7 @@ export class EditFilmComponent implements OnInit, OnDestroy {
       this.editMovieSubscription = this.filmApiSv.editMovie(formData).subscribe(
         (res) => {
           alert('Chỉnh sửa phim thành công');
-          this.router.navigate(['/show-film'])
+          this.router.navigate(['/show-film']);
         },
         (err) => {
           console.log(err);
