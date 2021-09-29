@@ -75,13 +75,18 @@ export class ShowFilmListComponent implements OnInit, OnDestroy {
               this.formInput.value.toLowerCase() == item.tenPhim.toLowerCase()
             );
           });
+
           if (this.itemFilmSearch) {
             this.notFoundFilm = false;
             this.filmSearchList.splice(0, 1);
             this.filmSearchList.push(this.itemFilmSearch!);
             this.filmList = this.filmSearchList;
           } else {
-            this.notFoundFilm = true;
+            this.formInput.value
+              ? (this.notFoundFilm = true)
+              : (this.notFoundFilm = false);
+            this.fetchFilmList(1, 10);
+            this.setFilmList();
           }
         },
         (err) => {
