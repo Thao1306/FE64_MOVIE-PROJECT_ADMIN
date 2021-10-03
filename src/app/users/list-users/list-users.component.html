@@ -10,16 +10,17 @@
     <div class="spinner-border text-danger" role="status"></div>
   </div>
   <ng-template #listUserTable>
+
     <table class="table">
-      <thead class="text-center">
+      <thead class="thead-dark text-center">
         <tr>
-          <th>STT</th>
-          <th>Tài khoản</th>
-          <th>Họ tên</th>
-          <th>Email</th>
-          <th>Số điện thoại</th>
-          <th>Mã người dùng</th>
-          <th>Xử lý</th>
+          <th scope="col">STT</th>
+          <th scope="col">Tài khoản</th>
+          <th scope="col">Họ tên</th>
+          <th scope="col">Email</th>
+          <th scope="col">Số điện thoại</th>
+          <th scope="col">Mã người dùng</th>
+          <th scope="col">Xử lý</th>
         </tr>
       </thead>
 
@@ -28,9 +29,9 @@
       </p>
 
       <ng-template #contentUser>
-        <tbody class="text-left bodyTable">
+        <tbody class="text-center bodyTable">
           <tr *ngFor="let user of userList; let order = index">
-            <td>{{ order + 1 + (userPagination.currentPage - 1) * 10 }}</td>
+            <th scope="row">{{ order + 1 + (userPagination.currentPage - 1) * 10 }}</th>
             <td>{{ user.taiKhoan }}</td>
             <td>{{ user.hoTen }}</td>
             <td>{{ user.email }}</td>
@@ -44,6 +45,7 @@
         </tbody>
       </ng-template>
     </table>
+
     <mat-paginator color="warn" [length]="userPagination.totalCount" [pageSize]="10" aria-label="Select page"
       (page)="changePage($event)" showFirstLastButtons="true">
     </mat-paginator>

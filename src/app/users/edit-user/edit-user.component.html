@@ -1,5 +1,5 @@
 <div class="container editMovieBlock">
-  <h1 class="fw-bold">CHỈNH SỬA THÔNG TIN NGƯỜI DÙNG</h1>
+  <h1 class="fw-bold text-center mt-3">CHỈNH SỬA THÔNG TIN NGƯỜI DÙNG</h1>
   <form #editUser="ngForm" (submit)="handleSubmit()" class="formAddUser" touched>
 
     <mat-form-field class="form-group" appearance="outline" color="warn">
@@ -44,9 +44,8 @@
       <mat-error *ngIf="maLoaiNguoiDung.errors?.required">Vui lòng nhập mã loại người dùng</mat-error>
     </mat-form-field>
 
-
     <div class="text-center mb-5">
-      <button mat-raised-button color="warn">Cập nhật thông tin phim</button>
+      <button mat-raised-button color="warn">Cập nhật thông tin người dùng</button>
     </div>
   </form>
 </div>

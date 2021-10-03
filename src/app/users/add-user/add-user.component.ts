@@ -1,4 +1,5 @@
 import { IUser } from './../../models/user';
+import { Router } from '@angular/router';
 import { UserAPIService } from './../../services/user-api.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -10,7 +11,6 @@ import { NgForm } from '@angular/forms';
 })
 export class AddUserComponent implements OnInit {
   @ViewChild('addUser') addFormUser!: NgForm;
-  file: FileList | undefined;
 
   UserId: string = ''
 
@@ -32,7 +32,7 @@ export class AddUserComponent implements OnInit {
     maLoaiNguoiDung: ""
   }
 
-    constructor(private userApiSv: UserAPIService) { }
+    constructor(private userApiSv: UserAPIService, private router: Router) { }
 
     handleSubmit(): void{
 
@@ -44,15 +44,13 @@ export class AddUserComponent implements OnInit {
         (res) => {
           console.log(res);
           alert('Thêm người dùng thành công');
+          this.router.navigate(['../list-users']);
         },
         (err) => {
           console.log(err);
+          alert('Tài khoản đã tồn tại');
         }
       );
-    };
-
-    handleChangeFile = (event: any) => {
-      this.file = event.target.file[0];
     };
 
   ngOnInit(): void {
