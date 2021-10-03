@@ -38,8 +38,12 @@
             <td>{{ user.soDt }}</td>
             <td>{{ user.maLoaiNguoiDung}}</td>
             <td>
-              <a class="editBtn" href="/edit-user/{{user.taiKhoan}}" mat-raised-button target="blank">Sửa</a>
-              <a class="deleteBtn " (click)="handleDelete(user.taiKhoan)" mat-raised-button target="blank">Xóa</a>
+              <a class="editBtn" href="/edit-user/{{user.taiKhoan}}" mat-raised-button target="blank">
+                <mat-icon>edit</mat-icon>
+              </a>
+              <a class="deleteBtn " (click)="handleDelete(user.taiKhoan)" mat-raised-button target="blank">
+                <mat-icon>delete_outline</mat-icon>
+              </a>
             </td>
           </tr>
         </tbody>
