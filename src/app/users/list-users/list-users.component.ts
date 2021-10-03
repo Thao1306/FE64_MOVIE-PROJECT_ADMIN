@@ -108,7 +108,7 @@ export class ListUsersComponent implements OnInit, OnDestroy  {
           },
           (err) => {
             console.log(err);
-            alert('Xóa người dùng không thành công');
+            alert('Người dùng này đã đặt vé xem phim không thể xóa!');
           }
         );
       }

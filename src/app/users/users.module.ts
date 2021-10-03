@@ -41,7 +41,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatNativeDateModule,
     MatIconModule,
     MatDialogModule,
-    MatExpansionModule
+    MatExpansionModule,
   ],
   exports: [
     ListUsersComponent,
