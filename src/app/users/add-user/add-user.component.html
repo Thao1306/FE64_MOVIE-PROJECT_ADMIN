@@ -38,11 +38,15 @@
       <mat-error *ngIf="phone.errors?.pattern">Vui lòng nhập chữ số</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="form-group" appearance="outline">
-      <mat-label>Loại người dùng</mat-label>
-      <input #maLoaiNguoiDung="ngModel" matInput required name="maLoaiNguoiDung" ngModel />
-      <mat-error *ngIf="maLoaiNguoiDung.errors?.required">Vui lòng nhập mã loại người dùng</mat-error>
-    </mat-form-field>
+    <div class="input-group mb-3">
+      <div class="mr-2">Vui lòng chọn mã loại người dùng :</div>
+      <select class="custom-select" #maLoaiNguoiDung="ngModel" matInput required name="maLoaiNguoiDung" ngModel>
+        <option value="KhachHang">KhachHang</option>
+        <option value="QuanTri">QuanTri</option>
+        <mat-error *ngIf="maLoaiNguoiDung.errors?.required">Vui lòng chọn mã loại người dùng</mat-error>
+      </select>
+    </div>
+    <br><br><br>
 
     <div class="text-center mb-5">
       <button mat-raised-button color="warn">Thêm người dùng</button>
