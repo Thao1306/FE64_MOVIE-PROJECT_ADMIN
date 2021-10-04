@@ -43,11 +43,10 @@ export class AddFilmComponent implements OnInit, OnDestroy {
         (res) => {
           console.log(res);
           alert('Thêm phim thành công');
-          this.router.navigate(['/show-film'])
+          this.router.navigate(['/show-film']);
         },
         (err) => {
-          console.log(err);
-          alert('Thêm phim không thành công');
+          alert(err.error.content);
         }
       );
     }

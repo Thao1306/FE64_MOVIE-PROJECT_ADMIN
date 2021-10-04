@@ -1,0 +1,24 @@
+<div class="container loginAdmin">
+  <h1 class="fw-bold">ĐĂNG NHẬP</h1>
+  <form #loginForm="ngForm" (submit)="handleSubmit()" class="formLoginAdmin">
+    <mat-form-field appearance="outline" class="form-group" color="warn">
+      <mat-label>Tài khoản</mat-label>
+      <input #taiKhoan="ngModel" matInput name="taiKhoan" ngModel required />
+      <mat-error *ngIf="taiKhoan.errors?.required"
+        >Vui lòng nhập tài khoản</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-group" color="warn">
+      <mat-label>Mật khẩu</mat-label>
+      <input #matKhau="ngModel" matInput name="matKhau" ngModel required />
+      <mat-error *ngIf="matKhau.errors?.required"
+        >Vui lòng nhập mật khẩu</mat-error
+      >
+    </mat-form-field>
+
+    <div class="text-center">
+      <button mat-raised-button color="warn">Đăng nhập</button>
+    </div>
+  </form>
+</div>

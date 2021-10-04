@@ -67,8 +67,7 @@ export class EditFilmComponent implements OnInit, OnDestroy {
           this.router.navigate(['/show-film']);
         },
         (err) => {
-          console.log(err);
-          alert('Chỉnh sửa phim không thành công');
+          alert(err.error.content);
         }
       );
     }

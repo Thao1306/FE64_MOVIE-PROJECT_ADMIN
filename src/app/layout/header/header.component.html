@@ -1,8 +1,22 @@
 <mat-toolbar color="warn">
-  <mat-icon>menu</mat-icon>
-  <span style="margin-left: 10px;">My App</span>
+  <a href="/show-film"
+    ><img
+      src="./../../../../assets/Capture-removebg-preview.png"
+      style="height: inherit; width: 50%"
+  /></a>
+
   <span class="example-spacer"></span>
-  <mat-icon style="margin-right: 10px;">person</mat-icon>
-  <mat-icon style="margin-right: 10px;">radio_button_unchecked</mat-icon>
-  <mat-icon style="margin-right: 10px;">arrow_drop_down</mat-icon>
+
+  <span mat-button [matMenuTriggerFor]="menu" class="infoIcon">
+    <p style="margin: 0">{{ accInfo?.hoTen }}</p>
+    <mat-icon style="margin-right: 10px">arrow_drop_down</mat-icon>
+  </span>
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item href="/edit-user/{{ accInfo?.taiKhoan }}">
+      <mat-icon>face</mat-icon>Cập nhật thông tin
+    </a>
+    <button type="submit" (click)="handleLogOut()" mat-menu-item>
+      <mat-icon>exit_to_app</mat-icon>Đăng xuất
+    </button>
+  </mat-menu>
 </mat-toolbar>

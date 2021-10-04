@@ -76,8 +76,7 @@ export class CreateShowtimesFilmComponent implements OnInit, OnDestroy {
           this.router.navigate(['/show-film']);
         },
         (err) => {
-          console.log(err);
-          alert('Tạo lịch chiếu không thành công');
+          alert(err.error.content);
         }
       );
   };

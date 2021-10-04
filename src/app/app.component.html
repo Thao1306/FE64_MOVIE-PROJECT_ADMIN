@@ -1,10 +1,15 @@
-<app-header></app-header>
-<mat-drawer-container class="example-container">
-  <mat-drawer class="matDrawer" mode="side" opened>
-    <app-sidebar ></app-sidebar>
-  </mat-drawer>
-  <mat-drawer-content >
-    <router-outlet ></router-outlet>
-  </mat-drawer-content>
-</mat-drawer-container>
-<app-footer></app-footer>
+<div *ngIf="!isLogin; else adminPage">
+  <app-account-admin (editIsLogin)='handleLogin($event)'></app-account-admin>
+</div>
+<ng-template #adminPage>
+  <app-header></app-header>
+  <mat-drawer-container class="example-container">
+    <mat-drawer class="matDrawer" mode="side" opened>
+      <app-sidebar></app-sidebar>
+    </mat-drawer>
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+  <app-footer></app-footer>
+</ng-template>

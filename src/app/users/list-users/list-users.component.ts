@@ -5,27 +5,27 @@ import { PageEvent } from '@angular/material/paginator';
 import { NgModel } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { IUser, IUserPagination } from './../../models/user';
-import { Component, OnInit, ViewChild ,OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { DialogContentDeleteUserComponent } from './dialog-content-delete-user/dialog-content-delete-user.component';
 
 @Component({
   selector: 'app-list-users',
   templateUrl: './list-users.component.html',
-  styleUrls: ['./list-users.component.css']
+  styleUrls: ['./list-users.component.css'],
 })
-export class ListUsersComponent implements OnInit, OnDestroy  {
+export class ListUsersComponent implements OnInit, OnDestroy {
   @ViewChild('input') formInput!: NgModel;
 
   constructor(
     private userSv: UserService,
     private userApiSv: UserAPIService,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
-   //Tạo biến hứng
-   userList: IUser[] = [];
-   fullUserList: IUser[] = [];
-   userPagination: IUserPagination = {
+  //Tạo biến hứng
+  userList: IUser[] = [];
+  fullUserList: IUser[] = [];
+  userPagination: IUserPagination = {
     currentPage: 0,
     count: 0,
     totalPages: 0,
@@ -39,20 +39,19 @@ export class ListUsersComponent implements OnInit, OnDestroy  {
   userListSubscription: Subscription | undefined;
   deleteUserSubscription: Subscription | undefined;
 
-
   fetchUserList = (currentPage: number, count: number) => {
     this.fetchUserListSubscription = this.userApiSv
       .fetchUserList(currentPage, count)
       .subscribe(
-      (res) => {
-        this.isLoading = false;
-        this.userSv.setUserList(res.content.items);
-        this.userPagination = res.content;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+        (res) => {
+          this.isLoading = false;
+          this.userSv.setUserList(res.content.items);
+          this.userPagination = res.content;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   };
 
   setUserList = () => {
@@ -68,28 +67,30 @@ export class ListUsersComponent implements OnInit, OnDestroy  {
     this.fetchUserListSubscription = this.userApiSv
       .fetchUserList(1, this.userPagination.totalCount)
       .subscribe(
-      (res) => {
-        this.isLoading = false;
-        this.fullUserList = res.content.items;
-        this.itemUserSearch = this.fullUserList.find((item) => {
-          return (
-            this.formInput.value === item.taiKhoan.toString() ||
-            this.formInput.value.toLowerCase() == item.hoTen.toLowerCase()
-          );
-        });
-        if (this.itemUserSearch) {
-          this.notFoundUser = false;
-          this.userSearchList.splice(0, 1);
-          this.userSearchList.push(this.itemUserSearch!);
-          this.userList = this.userSearchList;
-        } else {
-          this.notFoundUser = true;
+        (res) => {
+          this.isLoading = false;
+          this.fullUserList = res.content.items;
+          this.itemUserSearch = this.fullUserList.find((item) => {
+            return (
+              this.formInput.value == item.taiKhoan ||
+              this.formInput.value.trim().toLowerCase() ==
+                item.hoTen.trim().toLowerCase()
+            );
+          });
+
+          if (this.itemUserSearch) {
+            this.notFoundUser = false;
+            this.userSearchList.splice(0, 1);
+            this.userSearchList.push(this.itemUserSearch!);
+            this.userList = this.userSearchList;
+          } else {
+            this.notFoundUser = true;
+          }
+        },
+        (err) => {
+          console.log(err);
         }
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+      );
   };
 
   changePage = (event: PageEvent) => {
@@ -124,5 +125,4 @@ export class ListUsersComponent implements OnInit, OnDestroy  {
     this.fetchUserListSubscription?.unsubscribe;
     this.deleteUserSubscription?.unsubscribe;
   }
-
 }

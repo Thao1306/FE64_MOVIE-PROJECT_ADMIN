@@ -7,6 +7,7 @@ import { AddFilmComponent } from './films/add-film/add-film.component';
 import { ShowFilmListComponent } from './films/show-film-list/show-film-list.component';
 import { EditFilmComponent } from './films/edit-film/edit-film.component';
 import { CreateShowtimesFilmComponent } from './films/create-showtimes-film/create-showtimes-film.component';
+import { AccountAdminModule } from './account-admin/account-admin.module';
 
 const routes: Routes = [
   { path: 'add-user', component: AddUserComponent },
