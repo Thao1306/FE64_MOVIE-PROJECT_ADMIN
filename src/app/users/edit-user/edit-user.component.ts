@@ -67,7 +67,6 @@ export class EditUserComponent implements OnInit {
       .subscribe(
         (res) => {
           this.userInfo = res.content;
-          console.log(this.userInfo);
         },
         (err) => {
           console.log(err);

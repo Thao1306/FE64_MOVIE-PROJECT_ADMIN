@@ -6,17 +6,25 @@
   /></a>
 
   <span class="example-spacer"></span>
-
-  <span mat-button [matMenuTriggerFor]="menu" class="infoIcon">
-    <p style="margin: 0">{{ accInfo?.hoTen }}</p>
-    <mat-icon style="margin-right: 10px">arrow_drop_down</mat-icon>
-  </span>
-  <mat-menu #menu="matMenu">
-    <a mat-menu-item href="/edit-user/{{ accInfo?.taiKhoan }}">
-      <mat-icon>face</mat-icon>Cập nhật thông tin
-    </a>
-    <button type="submit" (click)="handleLogOut()" mat-menu-item>
-      <mat-icon>exit_to_app</mat-icon>Đăng xuất
-    </button>
-  </mat-menu>
+  <div *ngIf="isLogin">
+    <span mat-button [matMenuTriggerFor]="menu" class="infoIcon">
+      <p style="margin: 0">{{ accInfo?.hoTen }}</p>
+      <mat-icon style="margin-right: 10px">arrow_drop_down</mat-icon>
+    </span>
+    <mat-menu #menu="matMenu">
+      <a mat-menu-item routerLink="/edit-user/{{ accInfo?.taiKhoan }}">
+        <mat-icon>face</mat-icon>Cập nhật thông tin
+      </a>
+      <button
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="handleLogOut()"
+        mat-menu-item
+        href
+      >
+        <mat-icon>exit_to_app</mat-icon>Đăng xuất
+      </button>
+    </mat-menu>
+  </div>
 </mat-toolbar>

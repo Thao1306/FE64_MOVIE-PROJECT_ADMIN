@@ -13,16 +13,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private accSv: AccountService, private route: Router) {}
   accInfo: IAccAdmin | null | undefined;
   accInfoSubscription: Subscription | undefined;
+  isLogin: boolean = true;
+
   handleLogOut = () => {
     localStorage.removeItem('t');
-    this.route.navigate(['']);
-    window.location.reload();
+    this.accInfo = null;
+    this.isLogin = false;
   };
 
   ngOnInit(): void {
     this.accInfoSubscription = this.accSv.accInfo.subscribe(
       (accountInfo: IAccAdmin | null) => {
         this.accInfo = accountInfo;
+
+        if (this.accInfo) {
+          this.isLogin = true;
+        } else this.isLogin = false;
       }
     );
   }

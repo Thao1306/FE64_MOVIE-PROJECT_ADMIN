@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AccountApiService } from './services/account-api.service';
 import { AccountService } from './services/account.service';
@@ -10,16 +11,12 @@ import { AccountService } from './services/account.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   title = 'admin';
-  isLogin: boolean = false;
   constructor(
     private accApiSv: AccountApiService,
-    private accSv: AccountService
+    private accSv: AccountService,
+    private router: Router
   ) {}
   getInfoByTokenSubcription: Subscription | undefined;
-
-  handleLogin(event: any) {
-    this.isLogin = event;
-  }
 
   ngOnInit() {
     const token = `Beaber ${localStorage.getItem('t')}`;
@@ -29,12 +26,15 @@ export class AppComponent implements OnInit, OnDestroy {
         .subscribe(
           (res) => {
             this.accSv.accInfo.next(res.content);
-            this.isLogin = true;
           },
           (err) => {
-            alert(err.error.content);
+            this.router.navigate(['/']);
+            alert('Vui lòng đăng nhập');
+            localStorage.removeItem('t');
           }
         );
+    } else {
+      this.router.navigate(['/']);
     }
   }
   ngOnDestroy() {

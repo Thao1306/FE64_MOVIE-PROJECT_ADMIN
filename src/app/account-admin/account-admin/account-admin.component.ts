@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  ViewChild,
-  EventEmitter,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -20,7 +13,6 @@ import { AccountService } from 'src/app/services/account.service';
 })
 export class AccountAdminComponent implements OnInit, OnDestroy {
   @ViewChild('loginForm') loginForm!: NgForm;
-  @Output() editIsLogin = new EventEmitter();
   constructor(
     private accApiSv: AccountApiService,
     private route: Router,
@@ -38,14 +30,13 @@ export class AccountAdminComponent implements OnInit, OnDestroy {
             if (res.content.maLoaiNguoiDung === 'QuanTri') {
               this.accSv.getAccAdInfo(res.content);
               localStorage.setItem('t', res.content.accessToken);
-              this.editIsLogin.emit('true');
               this.route.navigate(['/show-film']);
             } else {
               alert('Tài khoản Quản trị viên mới đăng nhập được');
             }
           },
           (err) => {
-            console.log(err);
+            alert(err.error.content)
           }
         );
     }
