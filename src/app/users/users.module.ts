@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { DialogContentDeleteUserComponent } from './list-users/dialog-content-delete-user/dialog-content-delete-user.component';
 import { FormsModule } from '@angular/forms';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatIconModule,
     MatDialogModule,
     MatExpansionModule,
+    MatTabsModule
   ],
   exports: [
     ListUsersComponent,

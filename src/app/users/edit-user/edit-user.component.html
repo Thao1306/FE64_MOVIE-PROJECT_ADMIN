@@ -1,4 +1,4 @@
-<div class="container editMovieBlock">
+<!-- <div class="container editMovieBlock">
   <h1 class="fw-bold text-center mt-3">CHỈNH SỬA THÔNG TIN NGƯỜI DÙNG</h1>
   <form #editUser="ngForm" (submit)="handleSubmit()" class="formAddUser" touched>
 
@@ -37,13 +37,6 @@
       <mat-error *ngIf="phone.errors?.pattern">Vui lòng nhập chữ số</mat-error>
     </mat-form-field>
 
-    <!-- <mat-form-field class="form-group" appearance="outline">
-      <mat-label>Loại người dùng</mat-label>
-      <input #maLoaiNguoiDung="ngModel" matInput required name="maLoaiNguoiDung" required
-        [(ngModel)]="userInfo.maLoaiNguoiDung" />
-      <mat-error *ngIf="maLoaiNguoiDung.errors?.required">Vui lòng nhập mã loại người dùng</mat-error>
-    </mat-form-field> -->
-
     <div class="input-group mb-3">
       <div class="mr-2">Vui lòng chọn mã loại người dùng :</div>
       <select class="custom-select" #maLoaiNguoiDung="ngModel" matInput required name="maLoaiNguoiDung" required
@@ -59,4 +52,125 @@
       <button mat-raised-button color="warn">Cập nhật thông tin người dùng</button>
     </div>
   </form>
+</div> -->
+<div class="container">
+  <mat-tab-group>
+    <mat-tab label="Thông tin cá nhân">
+      <div class="padding">
+        <div class="container editMovieBlock">
+          <h1 class="fw-bold text-center mt-3">CHỈNH SỬA THÔNG TIN NGƯỜI DÙNG</h1>
+          <form #editUser="ngForm" (submit)="handleSubmit()" class="formAddUser" touched>
+
+            <mat-form-field class="form-group" appearance="outline" color="warn">
+              <mat-label>Tài khoản</mat-label>
+              <input #taiKhoan="ngModel" matInput name="taiKhoan" ngModel placeholder="tài khoản" disabled
+                [value]="userInfo?.taiKhoan" placeholder="Tài khoản" />
+              <mat-error *ngIf="taiKhoan.errors?.required">Vui lòng nhập tài khoản</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-group" color="warn">
+              <mat-label>Mật khẩu</mat-label>
+              <input #matKhau="ngModel" matInput name="matKhau" required [(ngModel)]="userInfo.matKhau" />
+              <mat-error *ngIf="matKhau.errors?.required">Vui lòng nhập mật khẩu</mat-error>
+              <mat-error *ngIf="matKhau.errors?.minlength || matKhau.errors?.maxlength">Mật khẩu phải từ 8 tới 16 kí tự
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-group" color="warn">
+              <mat-label>Email</mat-label>
+              <input #email="ngModel" matInput name="email" required email [(ngModel)]="userInfo.email" />
+              <mat-error *ngIf="email.errors?.required">Vui lòng nhập email</mat-error>
+              <mat-error *ngIf="email.errors?.email">Email không đúng định dạng</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-group" color="warn">
+              <mat-label>Họ tên</mat-label>
+              <input #hoTen="ngModel" matInput name="hoTen" required [(ngModel)]="userInfo.hoTen" />
+              <mat-error *ngIf="hoTen.errors?.required">Vui lòng nhập họ tên</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-group" color="warn">
+              <mat-label>Số điện thoại</mat-label>
+              <input #phone="ngModel" matInput required pattern="^[0-9]+$" name="soDt" required
+                [(ngModel)]="userInfo.soDT" />
+              <mat-error *ngIf="phone.errors?.required">Vui lòng nhập số điện thoại</mat-error>
+              <mat-error *ngIf="phone.errors?.pattern">Vui lòng nhập chữ số</mat-error>
+            </mat-form-field>
+
+            <div class="input-group mb-3">
+              <div class="mr-2">Vui lòng chọn mã loại người dùng :</div>
+              <select class="custom-select" #maLoaiNguoiDung="ngModel" matInput required name="maLoaiNguoiDung" required
+                [(ngModel)]="userInfo.maLoaiNguoiDung">
+                <option value="KhachHang">KhachHang</option>
+                <option value="QuanTri">QuanTri</option>
+                <mat-error *ngIf="maLoaiNguoiDung.errors?.required">Vui lòng chọn mã loại người dùng</mat-error>
+              </select>
+            </div>
+            <br><br><br>
+
+            <div class="text-center mb-5">
+              <button mat-raised-button color="warn">Cập nhật thông tin</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </mat-tab>
+
+    <mat-tab label="Lịch sử đặt vé ">
+      <div *ngIf="isLoading; else listTicketTable" class="container text-center my-5">
+        <div class="spinner-border text-danger" role="status"></div>
+      </div>
+      <ng-template #listTicketTable>
+        <table class="table">
+          <thead class="thead-dark text-center">
+            <tr>
+              <th scope="col">Mã vé</th>
+              <th scope="col">Tên phim</th>
+              <th scope="col">Ngày đặt</th>
+              <th scope="col">Tên rạp</th>
+              <th scope="col">Tên ghế</th>
+            </tr>
+          </thead>
+
+          <tbody class="text-center bodyTable">
+            <tr *ngFor="let ticket of showTicket">
+              <td>{{ ticket.maVe }}</td>
+              <td>{{ ticket.tenPhim }}</td>
+              <td>{{ ticket.ngayDat }}</td>
+              <td *ngFor="let seat of ticket.danhSachGhe">
+                {{ seat.tenRap }}
+              </td>
+              <td *ngFor="let seat of ticket.danhSachGhe">
+                Ghế: {{ seat.tenGhe }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-template>
+      <!-- <div class="text-center mt-3" *ngFor="let ticket of showTicket">
+        <img [src]="ticket.hinhAnh" width="50%" />
+        <br />
+        <br />
+        Mã Vé: {{ ticket.maVe }}
+        <br />
+        <br />
+        Tên Phim: {{ ticket.tenPhim }}
+        <br />
+        <br />
+        Ngày Đặt: {{ ticket.ngayDat }}
+        <br />
+        <br />
+        Thời Lượng Phim: {{ ticket.thoiLuongPhim }}
+        <br />
+
+        <br />
+        <p *ngFor="let seat of ticket.danhSachGhe">
+          {{ seat.tenHeThongRap }} - {{ seat.tenRap }} - Ghế: {{ seat.tenGhe }}
+        </p>
+      </div> -->
+    </mat-tab>
+  </mat-tab-group>
+  <br />
+  <br />
 </div>
