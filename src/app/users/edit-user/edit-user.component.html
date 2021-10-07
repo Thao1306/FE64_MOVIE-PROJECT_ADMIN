@@ -128,8 +128,8 @@
               <th scope="col">Mã vé</th>
               <th scope="col">Tên phim</th>
               <th scope="col">Ngày đặt</th>
-              <th scope="col">Tên rạp</th>
-              <th scope="col">Tên ghế</th>
+              <!-- <th scope="col">Tên rạp</th> -->
+              <th scope="col">Thông tin đặt ghế</th>
             </tr>
           </thead>
 
@@ -138,11 +138,12 @@
               <td>{{ ticket.maVe }}</td>
               <td>{{ ticket.tenPhim }}</td>
               <td>{{ ticket.ngayDat }}</td>
-              <td *ngFor="let seat of ticket.danhSachGhe">
-                {{ seat.tenRap }}
-              </td>
-              <td *ngFor="let seat of ticket.danhSachGhe">
-                Ghế: {{ seat.tenGhe }}
+              <td >
+                <p *ngFor="let seat of ticket.danhSachGhe">
+                  <span >{{seat.tenHeThongRap}} - {{seat.tenRap}} - Ghế: {{seat.tenGhe}} </span>
+                  <br>
+                </p>
+              
               </td>
             </tr>
           </tbody>
