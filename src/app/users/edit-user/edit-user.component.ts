@@ -1,6 +1,7 @@
+import { UserService } from './../../services/user.service';
 import { UserAPIService } from './../../services/user-api.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IUser } from './../../models/user';
+import { IUser, IShowTicket } from './../../models/user';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -14,6 +15,8 @@ export class EditUserComponent implements OnInit {
   @ViewChild('editUser') editUser!: NgForm;
 
   idUser: string = '';
+  isLoading: boolean = true;
+  showTicket: IShowTicket[] = [];
   userInfo: IUser = {
     maNhom: ',',
     taiKhoan: '',
@@ -30,6 +33,7 @@ export class EditUserComponent implements OnInit {
   constructor(
     private activated: ActivatedRoute,
     private userApiSv: UserAPIService,
+    private userSv: UserService,
     private router: Router
   ) {}
 
@@ -67,6 +71,20 @@ export class EditUserComponent implements OnInit {
       .subscribe(
         (res) => {
           this.userInfo = res.content;
+          console.log(this.userInfo);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+
+      this.fetchUserInfoSubscription = this.userApiSv
+      .fetchUserInfo(this.idUser)
+      .subscribe(
+        (res) => {
+          this.isLoading = false;
+          this.showTicket = res.content.thongTinDatVe;
+          console.log(this.showTicket);
         },
         (err) => {
           console.log(err);
