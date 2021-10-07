@@ -5,6 +5,7 @@ import { IUser, IShowTicket } from './../../models/user';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-edit-user',
@@ -29,6 +30,7 @@ export class EditUserComponent implements OnInit {
   files!: File;
   fetchUserInfoSubscription: Subscription | undefined;
   editUserSubscription: Subscription | undefined;
+  noTicket: boolean = true;
 
   constructor(
     private activated: ActivatedRoute,
@@ -71,23 +73,22 @@ export class EditUserComponent implements OnInit {
       .subscribe(
         (res) => {
           this.userInfo = res.content;
-          console.log(this.userInfo);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-
-      this.fetchUserInfoSubscription = this.userApiSv
-      .fetchUserInfo(this.idUser)
-      .subscribe(
-        (res) => {
           this.isLoading = false;
-          this.showTicket = res.content.thongTinDatVe;
-          console.log(this.showTicket);
+          this.showTicket = res.content.thongTinDatVe.map(
+            (item: IShowTicket) => {
+              return {
+                ...item,
+                ngayDat: dayjs(item.ngayDat).format('DD/MM/YYYY'),
+              };
+            }
+          );
+          if (this.showTicket.length) {
+            this.noTicket = false;
+          }
         },
         (err) => {
-          console.log(err);
+          alert(err.error.content);
+          this.router.navigate(['/list-users']);
         }
       );
   }

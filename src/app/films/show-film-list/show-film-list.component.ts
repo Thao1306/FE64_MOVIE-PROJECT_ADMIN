@@ -7,6 +7,7 @@ import { IFilm, IFilmPagination } from 'src/app/models/film';
 import { FilmApiService } from 'src/app/services/film-api.service';
 import { FilmService } from 'src/app/services/film.service';
 import { DialogContentDeleteFilmComponent } from './dialog-content-delete-film/dialog-content-delete-film.component';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-show-film-list',
@@ -56,7 +57,12 @@ export class ShowFilmListComponent implements OnInit, OnDestroy {
   setFilmList = () => {
     this.filmListSubscription = this.filmSv.filmList.subscribe(
       (films: IFilm[]) => {
-        this.filmList = films;
+        this.filmList = films.map((item: IFilm) => {
+          return {
+            ...item,
+            ngayKhoiChieu: dayjs(item.ngayKhoiChieu).format('DD/MM/YYYY'),
+          };
+        });
       }
     );
   };
@@ -80,7 +86,12 @@ export class ShowFilmListComponent implements OnInit, OnDestroy {
             this.notFoundFilm = false;
             this.filmSearchList.splice(0, 1);
             this.filmSearchList.push(this.itemFilmSearch!);
-            this.filmList = this.filmSearchList;
+            this.filmList = this.filmSearchList.map((item: IFilm) => {
+              return {
+                ...item,
+                ngayKhoiChieu: dayjs(item.ngayKhoiChieu).format('DD/MM/YYYY'),
+              };
+            });
           } else {
             this.formInput.value
               ? (this.notFoundFilm = true)
@@ -108,6 +119,7 @@ export class ShowFilmListComponent implements OnInit, OnDestroy {
           (res) => {
             alert('Xóa phim thành công');
             this.setFilmList();
+            window.location.reload()
           },
           (err) => {
             console.log(err);

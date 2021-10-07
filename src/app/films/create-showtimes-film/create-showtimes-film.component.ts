@@ -5,6 +5,8 @@ import { CinemaApiService } from 'src/app/services/cinema-api.service';
 import { CinemaService } from 'src/app/services/cinema.service';
 import * as dayjs from 'dayjs';
 import { Subscription } from 'rxjs';
+import { FilmApiService } from 'src/app/services/film-api.service';
+import { IFilm } from 'src/app/models/film';
 
 @Component({
   selector: 'app-create-showtimes-film',
@@ -19,7 +21,8 @@ export class CreateShowtimesFilmComponent implements OnInit, OnDestroy {
     private activated: ActivatedRoute,
     private cinemaApiSv: CinemaApiService,
     private cinemaSv: CinemaService,
-    private router: Router
+    private router: Router,
+    private filmApiSv: FilmApiService
   ) {}
   panelOpenState = false;
   showTime!: ICinemaSystem[];
@@ -28,14 +31,44 @@ export class CreateShowtimesFilmComponent implements OnInit, OnDestroy {
   fetchCinemaSystemSubscription: Subscription | undefined;
   createShowTimeFilmSubscription: Subscription | undefined;
   listCinemaSubscription: Subscription | undefined;
+  filmInfo: IFilm = {
+    maPhim: 0,
+    tenPhim: '',
+    biDanh: '',
+    trailer: '',
+    hinhAnh: '',
+    moTa: '',
+    ngayKhoiChieu: '',
+    danhGia: 0,
+    hot: false,
+    dangChieu: false,
+    sapChieu: false,
+  };
+  isLoading: boolean = true;
 
   fetchListCinema = () => {
     this.fetchCinemaSubscription = this.cinemaApiSv.fetchCinema().subscribe(
       (res) => {
         this.cinemaSv.getListCinema(res.content);
+        this.isLoading = false
       },
       (err) => {
         console.log(err);
+      }
+    );
+  };
+
+  fetchFilmInfo = (id: number) => {
+    this.filmApiSv.fetchFilmInfo(id).subscribe(
+      (res) => {
+        this.filmInfo = {
+          ...res.content,
+          ngayKhoiChieu: dayjs(res.content.ngayKhoiChieu).format('DD/MM/YYYY'),
+        };
+      },
+      (err) => {
+        alert("Mã phim không hợp lệ!")
+        this.router.navigate(['/show-film'])
       }
     );
   };
@@ -81,6 +114,7 @@ export class CreateShowtimesFilmComponent implements OnInit, OnDestroy {
       );
   };
   ngOnInit(): void {
+    this.fetchFilmInfo(this.activated.snapshot.params.id);
     this.fetchListCinema();
     this.listCinemaSubscription = this.cinemaSv.listCinema.subscribe(
       (cinema: ICinema[]) => {

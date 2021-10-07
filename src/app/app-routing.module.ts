@@ -40,6 +40,11 @@ const routes: Routes = [
     component: CreateShowtimesFilmComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: '**',
+    redirectTo: '',
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

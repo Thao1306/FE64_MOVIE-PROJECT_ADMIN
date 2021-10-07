@@ -1,81 +1,99 @@
 <div class="container createShowtimeBlock">
   <h1 class="fw-bold">TẠO LỊCH CHIẾU PHIM</h1>
-  <mat-expansion-panel
-    style="width: 60%"
-    (opened)="panelOpenState = true"
-    (closed)="panelOpenState = false"
-    *ngFor="let cinema of listCinema"
-  >
-    <mat-expansion-panel-header
-      (click)="fetchCinemaSystem(cinema.maHeThongRap)"
-    >
-      <mat-panel-title>
-        {{ cinema.maHeThongRap }}
-      </mat-panel-title>
-    </mat-expansion-panel-header>
-    <form
-      #showtimeForm="ngForm"
-      (submit)="handleSubmit()"
-      [name]="cinema.maHeThongRap"
-    >
-      <mat-form-field appearance="outline" class="form-group" color="warn">
-        <mat-label>Chọn ngày khởi chiếu</mat-label>
-        <input
-          #ngayKhoiChieu="ngModel"
-          matInput
-         
-          ngModel
-          name="ngayChieuGioChieu"
-          required
-          type="datetime-local"
-        />
-        <!-- <mat-datepicker-toggle matSuffix [for]="picker">
-          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-        </mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="ngayKhoiChieu.errors?.required"
-          >Vui lòng nhập ngày khởi chiếu</mat-error
-        > -->
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="form-group" color="warn">
-        <mat-label>Chọn cụm rạp</mat-label>
-        <mat-select ngModel name="maRap">
-          <mat-option
-            *ngFor="let cinemaBranch of showTime"
-            [value]="cinemaBranch.maCumRap"
-          >
-            {{ cinemaBranch.tenCumRap }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field class="form-group" appearance="outline" color="warn">
-        <mat-label>Giá vé</mat-label>
-        <input
-          #giaVe="ngModel"
-          matInput
-          name="giaVe"
-          ngModel
-          placeholder="giá vé"
-          required
-          pattern="^[0-9]+$"
-        />
-        <mat-error *ngIf="giaVe.errors?.required"
-          >Vui lòng nhập giá vé</mat-error
-        >
-        <mat-error *ngIf="giaVe.errors?.pattern"
-          >Giá vé phải là chữ số</mat-error
-        >
-      </mat-form-field>
-
-      <div class="text-center">
-        <button mat-raised-button color="warn">Tạo lịch chiếu</button>
+  <div *ngIf="isLoading;else createShowTimeForm" class="spinner-border text-danger" role="status">
+    <span class="sr-only"></span>
+  </div>
+  <ng-template #createShowTimeForm>
+    <div class="container d-flex filmInfo">
+      <div class="col-md-3">
+        <img [src]="filmInfo.hinhAnh" width="80%" />
       </div>
-    </form>
-  </mat-expansion-panel>
-
- 
-
+      <div class="col-md-9">
+        <h2>
+          <span style="font-weight: 300">Mã phim: </span> {{ filmInfo.maPhim }}
+        </h2>
+        <h2>
+          <span style="font-weight: 300">Tên phim: </span>{{ filmInfo.tenPhim }}
+        </h2>
+        <h2>
+          <span style="font-weight: 300">Ngày khởi chiếu: </span
+          >{{ filmInfo.ngayKhoiChieu }}
+        </h2>
+      </div>
+    </div>
+    <mat-expansion-panel
+      style="width: 60%"
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+      *ngFor="let cinema of listCinema"
+    >
+      <mat-expansion-panel-header
+        (click)="fetchCinemaSystem(cinema.maHeThongRap)"
+      >
+        <mat-panel-title>
+          {{ cinema.maHeThongRap }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <form
+        #showtimeForm="ngForm"
+        (submit)="handleSubmit()"
+        [name]="cinema.maHeThongRap"
+      >
+        <mat-form-field appearance="outline" class="form-group" color="warn">
+          <mat-label>Chọn ngày khởi chiếu</mat-label>
+          <input
+            #ngayKhoiChieu="ngModel"
+            matInput
+            ngModel
+            name="ngayChieuGioChieu"
+            required
+            type="datetime-local"
+          />
+          <!-- <mat-datepicker-toggle matSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="ngayKhoiChieu.errors?.required"
+            >Vui lòng nhập ngày khởi chiếu</mat-error
+          > -->
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="form-group" color="warn">
+          <mat-label>Chọn cụm rạp</mat-label>
+          <mat-select ngModel name="maRap">
+            <mat-option
+              *ngFor="let cinemaBranch of showTime"
+              [value]="cinemaBranch.maCumRap"
+            >
+              {{ cinemaBranch.tenCumRap }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field class="form-group" appearance="outline" color="warn">
+          <mat-label>Giá vé</mat-label>
+          <input
+            #giaVe="ngModel"
+            matInput
+            name="giaVe"
+            ngModel
+            placeholder="giá vé"
+            required
+            pattern="^[0-9]+$"
+          />
+          <mat-error *ngIf="giaVe.errors?.required"
+            >Vui lòng nhập giá vé</mat-error
+          >
+          <mat-error *ngIf="giaVe.errors?.pattern"
+            >Giá vé phải là chữ số</mat-error
+          >
+        </mat-form-field>
+  
+        <div class="text-center">
+          <button mat-raised-button color="warn">Tạo lịch chiếu</button>
+        </div>
+      </form>
+    </mat-expansion-panel>
+  </ng-template>
 
 </div>

@@ -1,6 +1,10 @@
 <div class="container editMovieBlock">
   <h1 class="fw-bold">CHỈNH SỬA THÔNG TIN PHIM</h1>
-  <form
+  <div *ngIf="isLoading;else editMovieForm" class="spinner-border text-danger" role="status">
+    <span class="sr-only"></span>
+  </div>
+  <ng-template #editMovieForm>
+    <form
     #editMovie="ngForm"
     (submit)="handleSubmit()"
     class="formAddMovie"
@@ -15,7 +19,7 @@
         ngModel
         placeholder="mã phim"
         disabled
-        [value]="filmInfo?.maPhim"
+        [(ngModel)]="filmInfo.maPhim"
       />
     </mat-form-field>
 
@@ -130,4 +134,6 @@
       <button mat-raised-button color="warn">Cập nhật thông tin phim</button>
     </div>
   </form>
+  </ng-template>
+  
 </div>

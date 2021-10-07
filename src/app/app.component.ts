@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
           },
           (err) => {
             this.router.navigate(['/']);
-            alert('Vui lòng đăng nhập');
+            alert('Vui lòng đăng nhập để vào trang quản lý');
             localStorage.removeItem('t');
           }
         );

@@ -42,13 +42,11 @@ export class AddUserComponent implements OnInit {
       const newUser = { ...this.addFormUser.value, maNhom: "GP01"};
       this.userApiSv.addUser(newUser).subscribe(
         (res) => {
-          console.log(res);
           alert('Thêm người dùng thành công');
           this.router.navigate(['../list-users']);
         },
         (err) => {
-          console.log(err);
-          alert('Tài khoản đã tồn tại');
+          alert(err.error.content);
         }
       );
     };

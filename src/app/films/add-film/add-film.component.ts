@@ -41,7 +41,6 @@ export class AddFilmComponent implements OnInit, OnDestroy {
 
       this.addMovieSubscription = this.filmApiSv.addMovie(formData).subscribe(
         (res) => {
-          console.log(res);
           alert('Thêm phim thành công');
           this.router.navigate(['/show-film']);
         },

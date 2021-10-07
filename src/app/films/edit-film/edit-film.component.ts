@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { NgForm, NgModel } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IFilm } from 'src/app/models/film';
 import { FilmApiService } from 'src/app/services/film-api.service';
@@ -31,6 +31,7 @@ export class EditFilmComponent implements OnInit, OnDestroy {
   files!: File;
   fetchFilmInfoSubscription: Subscription | undefined;
   editMovieSubscription: Subscription | undefined;
+  isLoading: boolean = true;
 
   constructor(
     private activated: ActivatedRoute,
@@ -78,15 +79,17 @@ export class EditFilmComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit(): void {
-    this.idFilm = parseInt(this.activated.snapshot.params.id);
+    this.idFilm = this.activated.snapshot.params.id;
     this.fetchFilmInfoSubscription = this.filmApiSv
       .fetchFilmInfo(this.idFilm)
       .subscribe(
         (res) => {
+          this.isLoading = false;
           this.filmInfo = res.content;
         },
         (err) => {
-          console.log(err);
+          alert('Mã phim không hợp lệ');
+          this.router.navigate(['/show-film']);
         }
       );
   }
