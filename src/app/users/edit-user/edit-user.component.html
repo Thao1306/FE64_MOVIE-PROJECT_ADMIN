@@ -1,58 +1,3 @@
-<!-- <div class="container editMovieBlock">
-  <h1 class="fw-bold text-center mt-3">CHỈNH SỬA THÔNG TIN NGƯỜI DÙNG</h1>
-  <form #editUser="ngForm" (submit)="handleSubmit()" class="formAddUser" touched>
-
-    <mat-form-field class="form-group" appearance="outline" color="warn">
-      <mat-label>Tài khoản</mat-label>
-      <input #taiKhoan="ngModel" matInput name="taiKhoan" ngModel placeholder="tài khoản" disabled
-        [value]="userInfo?.taiKhoan" placeholder="Tài khoản" />
-      <mat-error *ngIf="taiKhoan.errors?.required">Vui lòng nhập tài khoản</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="form-group" color="warn">
-      <mat-label>Mật khẩu</mat-label>
-      <input #matKhau="ngModel" matInput name="matKhau" required [(ngModel)]="userInfo.matKhau" />
-      <mat-error *ngIf="matKhau.errors?.required">Vui lòng nhập mật khẩu</mat-error>
-      <mat-error *ngIf="matKhau.errors?.minlength || matKhau.errors?.maxlength">Mật khẩu phải từ 8 tới 16 kí tự
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="form-group" color="warn">
-      <mat-label>Email</mat-label>
-      <input #email="ngModel" matInput name="email" required email [(ngModel)]="userInfo.email" />
-      <mat-error *ngIf="email.errors?.required">Vui lòng nhập email</mat-error>
-      <mat-error *ngIf="email.errors?.email">Email không đúng định dạng</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="form-group" color="warn">
-      <mat-label>Họ tên</mat-label>
-      <input #hoTen="ngModel" matInput name="hoTen" required [(ngModel)]="userInfo.hoTen" />
-      <mat-error *ngIf="hoTen.errors?.required">Vui lòng nhập họ tên</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="form-group" color="warn">
-      <mat-label>Số điện thoại</mat-label>
-      <input #phone="ngModel" matInput required pattern="^[0-9]+$" name="soDt" required [(ngModel)]="userInfo.soDT" />
-      <mat-error *ngIf="phone.errors?.required">Vui lòng nhập số điện thoại</mat-error>
-      <mat-error *ngIf="phone.errors?.pattern">Vui lòng nhập chữ số</mat-error>
-    </mat-form-field>
-
-    <div class="input-group mb-3">
-      <div class="mr-2">Vui lòng chọn mã loại người dùng :</div>
-      <select class="custom-select" #maLoaiNguoiDung="ngModel" matInput required name="maLoaiNguoiDung" required
-        [(ngModel)]="userInfo.maLoaiNguoiDung">
-        <option value="KhachHang">KhachHang</option>
-        <option value="QuanTri">QuanTri</option>
-        <mat-error *ngIf="maLoaiNguoiDung.errors?.required">Vui lòng chọn mã loại người dùng</mat-error>
-      </select>
-    </div>
-    <br><br><br>
-
-    <div class="text-center mb-5">
-      <button mat-raised-button color="warn">Cập nhật thông tin người dùng</button>
-    </div>
-  </form>
-</div> -->
 <div class="container">
   <mat-tab-group color="warn" mat-align-tabs="center" animationDuration="500ms">
     <mat-tab>
@@ -60,138 +5,54 @@
         <h2>Thông tin cá nhân</h2>
       </ng-template>
       <div class="padding">
-        <div class="container editMovieBlock">
+        <div class="container-1 editMovieBlock">
           <h1 class="fw-bold text-center mt-3">
             CHỈNH SỬA THÔNG TIN NGƯỜI DÙNG
           </h1>
-          <form
-            #editUser="ngForm"
-            (submit)="handleSubmit()"
-            class="formAddUser"
-            touched
-          >
-            <mat-form-field
-              class="form-group"
-              appearance="outline"
-              color="warn"
-            >
+          <form #editUser="ngForm" (submit)="handleSubmit()" class="formAddUser" touched>
+            <mat-form-field class="form-group" appearance="outline" color="warn">
               <mat-label>Tài khoản</mat-label>
-              <input
-                #taiKhoan="ngModel"
-                matInput
-                name="taiKhoan"
-                ngModel
-                placeholder="tài khoản"
-                disabled
-                [value]="userInfo?.taiKhoan"
-                placeholder="Tài khoản"
-              />
-              <mat-error *ngIf="taiKhoan.errors?.required"
-                >Vui lòng nhập tài khoản</mat-error
-              >
+              <input #taiKhoan="ngModel" matInput name="taiKhoan" ngModel placeholder="tài khoản" disabled
+                [value]="userInfo?.taiKhoan" placeholder="Tài khoản" />
+              <mat-error *ngIf="taiKhoan.errors?.required">Vui lòng nhập tài khoản</mat-error>
             </mat-form-field>
 
-            <mat-form-field
-              appearance="outline"
-              class="form-group"
-              color="warn"
-            >
+            <mat-form-field appearance="outline" class="form-group" color="warn">
               <mat-label>Mật khẩu</mat-label>
-              <input
-                #matKhau="ngModel"
-                matInput
-                name="matKhau"
-                required
-                [(ngModel)]="userInfo.matKhau"
-              />
-              <mat-error *ngIf="matKhau.errors?.required"
-                >Vui lòng nhập mật khẩu</mat-error
-              >
-              <mat-error
-                *ngIf="matKhau.errors?.minlength || matKhau.errors?.maxlength"
-                >Mật khẩu phải từ 8 tới 16 kí tự
+              <input #matKhau="ngModel" matInput name="matKhau" required [(ngModel)]="userInfo.matKhau" />
+              <mat-error *ngIf="matKhau.errors?.required">Vui lòng nhập mật khẩu</mat-error>
+              <mat-error *ngIf="matKhau.errors?.minlength || matKhau.errors?.maxlength">Mật khẩu phải từ 8 tới 16 kí tự
               </mat-error>
             </mat-form-field>
 
-            <mat-form-field
-              appearance="outline"
-              class="form-group"
-              color="warn"
-            >
+            <mat-form-field appearance="outline" class="form-group" color="warn">
               <mat-label>Email</mat-label>
-              <input
-                #email="ngModel"
-                matInput
-                name="email"
-                required
-                email
-                [(ngModel)]="userInfo.email"
-              />
-              <mat-error *ngIf="email.errors?.required"
-                >Vui lòng nhập email</mat-error
-              >
-              <mat-error *ngIf="email.errors?.email"
-                >Email không đúng định dạng</mat-error
-              >
+              <input #email="ngModel" matInput name="email" required email [(ngModel)]="userInfo.email" />
+              <mat-error *ngIf="email.errors?.required">Vui lòng nhập email</mat-error>
+              <mat-error *ngIf="email.errors?.email">Email không đúng định dạng</mat-error>
             </mat-form-field>
 
-            <mat-form-field
-              appearance="outline"
-              class="form-group"
-              color="warn"
-            >
+            <mat-form-field appearance="outline" class="form-group" color="warn">
               <mat-label>Họ tên</mat-label>
-              <input
-                #hoTen="ngModel"
-                matInput
-                name="hoTen"
-                required
-                [(ngModel)]="userInfo.hoTen"
-              />
-              <mat-error *ngIf="hoTen.errors?.required"
-                >Vui lòng nhập họ tên</mat-error
-              >
+              <input #hoTen="ngModel" matInput name="hoTen" required [(ngModel)]="userInfo.hoTen" />
+              <mat-error *ngIf="hoTen.errors?.required">Vui lòng nhập họ tên</mat-error>
             </mat-form-field>
 
-            <mat-form-field
-              appearance="outline"
-              class="form-group"
-              color="warn"
-            >
+            <mat-form-field appearance="outline" class="form-group" color="warn">
               <mat-label>Số điện thoại</mat-label>
-              <input
-                #phone="ngModel"
-                matInput
-                required
-                pattern="^[0-9]+$"
-                name="soDt"
-                required
-                [(ngModel)]="userInfo.soDT"
-              />
-              <mat-error *ngIf="phone.errors?.required"
-                >Vui lòng nhập số điện thoại</mat-error
-              >
-              <mat-error *ngIf="phone.errors?.pattern"
-                >Vui lòng nhập chữ số</mat-error
-              >
+              <input #phone="ngModel" matInput required pattern="^[0-9]+$" name="soDt" required
+                [(ngModel)]="userInfo.soDT" />
+              <mat-error *ngIf="phone.errors?.required">Vui lòng nhập số điện thoại</mat-error>
+              <mat-error *ngIf="phone.errors?.pattern">Vui lòng nhập chữ số</mat-error>
             </mat-form-field>
 
             <div class="input-group mb-3">
               <div class="mr-2">Vui lòng chọn mã loại người dùng :</div>
-              <select
-                class="custom-select"
-                #maLoaiNguoiDung="ngModel"
-                matInput
-                required
-                name="maLoaiNguoiDung"
-                required
-                [(ngModel)]="userInfo.maLoaiNguoiDung"
-              >
+              <select class="custom-select" #maLoaiNguoiDung="ngModel" matInput required name="maLoaiNguoiDung" required
+                [(ngModel)]="userInfo.maLoaiNguoiDung">
                 <option value="KhachHang">KhachHang</option>
                 <option value="QuanTri">QuanTri</option>
-                <mat-error *ngIf="maLoaiNguoiDung.errors?.required"
-                  >Vui lòng chọn mã loại người dùng</mat-error
-                >
+                <mat-error *ngIf="maLoaiNguoiDung.errors?.required">Vui lòng chọn mã loại người dùng</mat-error>
               </select>
             </div>
             <br /><br /><br />
@@ -204,14 +65,11 @@
       </div>
     </mat-tab>
 
-    <mat-tab>
+    <mat-tab class="container-2">
       <ng-template mat-tab-label>
         <h2>Lịch sử đặt vé</h2>
       </ng-template>
-      <div
-        *ngIf="isLoading; else listTicketTable"
-        class="container text-center my-5"
-      >
+      <div *ngIf="isLoading; else listTicketTable" class="container text-center my-5">
         <div class="spinner-border text-danger" role="status"></div>
       </div>
       <ng-template #listTicketTable>
@@ -230,7 +88,7 @@
                 <th scope="col">Thông tin đặt ghế</th>
               </tr>
             </thead>
-  
+
             <tbody class="text-center bodyTable">
               <tr *ngFor="let ticket of showTicket">
                 <td>{{ ticket.maVe }}</td>
@@ -238,8 +96,7 @@
                 <td>{{ ticket.ngayDat }}</td>
                 <td>
                   <p *ngFor="let seat of ticket.danhSachGhe">
-                    <span
-                      >{{ seat.tenHeThongRap }} - {{ seat.tenRap }} - Ghế:
+                    <span>{{ seat.tenHeThongRap }} - {{ seat.tenRap }} - Ghế:
                       {{ seat.tenGhe }}
                     </span>
                     <br />
@@ -249,7 +106,7 @@
             </tbody>
           </table>
         </ng-template>
-       
+
       </ng-template>
       <!-- <div class="text-center mt-3" *ngFor="let ticket of showTicket">
         <img [src]="ticket.hinhAnh" width="50%" />
