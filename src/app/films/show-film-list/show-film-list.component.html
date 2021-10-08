@@ -29,7 +29,7 @@
           <th>Hình ảnh</th>
           <th>Mã phim</th>
           <th>Tên phim</th>
-          <th>Mô tả</th>
+          <th class="desFilm">Mô tả</th>
           <th>Ngày chiếu</th>
           <th>Hiện trạng</th>
           <th>Xử lý</th>
@@ -48,12 +48,12 @@
           <tr *ngFor="let film of filmList; let order = index">
             <td>{{ order + 1 + (filmPagination.currentPage - 1) * 10 }}</td>
             <td class="text-center">
-              <img [src]="film.hinhAnh" width="25%" />
+              <img [src]="film.hinhAnh" class="imgFilm"/>
             </td>
             <td>{{ film.maPhim }}</td>
             <td>{{ film.tenPhim }}</td>
-            <td>
-              <span>
+            <td class="desFilm">
+              <span >
                 {{ film.moTa }}
               </span>
             </td>

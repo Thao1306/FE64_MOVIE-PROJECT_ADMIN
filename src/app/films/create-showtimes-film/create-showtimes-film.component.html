@@ -1,24 +1,23 @@
 <div class="container createShowtimeBlock">
   <h1 class="fw-bold">TẠO LỊCH CHIẾU PHIM</h1>
-  <div *ngIf="isLoading;else createShowTimeForm" class="spinner-border text-danger" role="status">
+  <div
+    *ngIf="isLoading; else createShowTimeForm"
+    class="spinner-border text-danger"
+    role="status"
+  >
     <span class="sr-only"></span>
   </div>
   <ng-template #createShowTimeForm>
-    <div class="container d-flex filmInfo">
-      <div class="col-md-3">
+    <div class="container d-flex filmDetail">
+      <div class="col-lg-3 col-md-5">
         <img [src]="filmInfo.hinhAnh" width="80%" />
       </div>
-      <div class="col-md-9">
-        <h2>
-          <span style="font-weight: 300">Mã phim: </span> {{ filmInfo.maPhim }}
-        </h2>
-        <h2>
-          <span style="font-weight: 300">Tên phim: </span>{{ filmInfo.tenPhim }}
-        </h2>
-        <h2>
-          <span style="font-weight: 300">Ngày khởi chiếu: </span
-          >{{ filmInfo.ngayKhoiChieu }}
-        </h2>
+      <div class="col-lg-9 col-md-7 col-12 filmInfo">
+        <span>Mã phim: {{ filmInfo.maPhim }}</span>
+
+        <span>Tên phim: {{ filmInfo.tenPhim }}</span>
+
+        <span>Ngày khởi chiếu:{{ filmInfo.ngayKhoiChieu }} </span>
       </div>
     </div>
     <mat-expansion-panel
@@ -57,7 +56,7 @@
             >Vui lòng nhập ngày khởi chiếu</mat-error
           > -->
         </mat-form-field>
-  
+
         <mat-form-field appearance="outline" class="form-group" color="warn">
           <mat-label>Chọn cụm rạp</mat-label>
           <mat-select ngModel name="maRap">
@@ -69,7 +68,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-  
+
         <mat-form-field class="form-group" appearance="outline" color="warn">
           <mat-label>Giá vé</mat-label>
           <input
@@ -88,12 +87,11 @@
             >Giá vé phải là chữ số</mat-error
           >
         </mat-form-field>
-  
+
         <div class="text-center">
           <button mat-raised-button color="warn">Tạo lịch chiếu</button>
         </div>
       </form>
     </mat-expansion-panel>
   </ng-template>
-
 </div>

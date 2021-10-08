@@ -2,6 +2,9 @@
   width: -webkit-fill-available;
   padding-right: 10px;
 }
+.imgFilm {
+  width: 25%;
+}
 
 .search-container {
   display: flex;
@@ -16,4 +19,15 @@
 }
 .bodyTable td .editBtn:hover {
   color: #f44336;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .imgFilm {
+    width: 50%;
+  }
+  .desFilm {
+    display: none;
+
+  }
 }
