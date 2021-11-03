@@ -48,12 +48,12 @@
           <tr *ngFor="let film of filmList; let order = index">
             <td>{{ order + 1 + (filmPagination.currentPage - 1) * 10 }}</td>
             <td class="text-center">
-              <img [src]="film.hinhAnh" class="imgFilm"/>
+              <img [src]="film.hinhAnh" class="imgFilm" />
             </td>
             <td>{{ film.maPhim }}</td>
             <td>{{ film.tenPhim }}</td>
             <td class="desFilm">
-              <span >
+              <span>
                 {{ film.moTa }}
               </span>
             </td>
@@ -77,15 +77,26 @@
         </tbody>
       </ng-template>
     </table>
-
-    <mat-paginator
+    <!-- <mat-paginator
+      *ngIf="noPaginator; else paginator"
       color="warn"
-      [length]="filmPagination.totalCount"
-      [pageSize]="10"
+      length="0"
+      pageSize="1"
       aria-label="Select page"
-      (page)="changePage($event)"
       showFirstLastButtons="true"
     >
-    </mat-paginator>
+    </mat-paginator> -->
+    <!-- <ng-template #paginator> -->
+      <mat-paginator
+      *ngIf="!noPaginator"
+        color="warn"
+        [length]="filmPagination.totalCount"
+        [pageSize]="10"
+        aria-label="Select page"
+        (page)="changePage($event)"
+        showFirstLastButtons="true"
+      >
+      </mat-paginator>
+    <!-- </ng-template> -->
   </ng-template>
 </div>

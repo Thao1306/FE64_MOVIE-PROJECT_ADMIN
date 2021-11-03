@@ -29,6 +29,7 @@ export class ShowFilmListComponent implements OnInit, OnDestroy {
   filmSearchList: IFilm[] = [];
   isLoading: boolean = true;
   notFoundFilm: boolean = false;
+  noPaginator: boolean = false;
   fetchFilmListSubscription: Subscription | undefined;
   filmListSubscription: Subscription | undefined;
   deleteMovieSubscription: Subscription | undefined;
@@ -69,41 +70,47 @@ export class ShowFilmListComponent implements OnInit, OnDestroy {
 
   handleSearchFilm = () => {
     this.isLoading = true;
-    this.fetchFilmListSubscription = this.filmApiSv
-      .fetchFilmList(1, this.filmPagination.totalCount)
-      .subscribe(
-        (res) => {
-          this.isLoading = false;
-          this.fullFilmList = res.content.items;
-          this.itemFilmSearch = this.fullFilmList.find((item) => {
-            return (
-              this.formInput.value == item.maPhim.toString() ||
-              this.formInput.value.toLowerCase() == item.tenPhim.toLowerCase()
-            );
-          });
-
-          if (this.itemFilmSearch) {
-            this.notFoundFilm = false;
-            this.filmSearchList.splice(0, 1);
-            this.filmSearchList.push(this.itemFilmSearch!);
-            this.filmList = this.filmSearchList.map((item: IFilm) => {
-              return {
-                ...item,
-                ngayKhoiChieu: dayjs(item.ngayKhoiChieu).format('DD/MM/YYYY'),
-              };
+    if (this.formInput.value) {
+      this.fetchFilmListSubscription = this.filmApiSv
+        .fetchFilmList(1, this.filmPagination.totalCount)
+        .subscribe(
+          (res) => {
+            this.isLoading = false;
+            this.fullFilmList = res.content.items;
+            this.filmSearchList = this.fullFilmList.filter((item) => {
+              return (
+                item.tenPhim
+                  .toLowerCase()
+                  .includes(this.formInput.value.toLowerCase()) ||
+                item.maPhim.toString().includes(this.formInput.value)
+              );
             });
-          } else {
-            this.formInput.value
-              ? (this.notFoundFilm = true)
-              : (this.notFoundFilm = false);
-            this.fetchFilmList(1, 10);
-            this.setFilmList();
+
+            if (this.filmSearchList.length > 0) {
+              this.notFoundFilm = false;
+              this.noPaginator = true;
+              this.filmList = this.filmSearchList.map((item: IFilm) => {
+                return {
+                  ...item,
+                  ngayKhoiChieu: dayjs(item.ngayKhoiChieu).format('DD/MM/YYYY'),
+                };
+              });
+            } else {
+              this.notFoundFilm = true;
+              this.noPaginator = true;
+            }
+          },
+          (err) => {
+            console.log(err);
           }
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+        );
+    } else {
+      this.isLoading = false;
+      this.notFoundFilm = false;
+      this.noPaginator = false;
+      this.fetchFilmList(1, 10);
+      this.setFilmList();
+    }
   };
 
   changePage = (event: PageEvent) => {
@@ -119,7 +126,7 @@ export class ShowFilmListComponent implements OnInit, OnDestroy {
           (res) => {
             alert('Xóa phim thành công');
             this.setFilmList();
-            window.location.reload()
+            window.location.reload();
           },
           (err) => {
             console.log(err);

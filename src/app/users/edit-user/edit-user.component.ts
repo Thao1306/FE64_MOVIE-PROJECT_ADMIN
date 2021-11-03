@@ -51,7 +51,10 @@ export class EditUserComponent implements OnInit {
       this.editUserSubscription = this.userApiSv.editUser(newUser).subscribe(
         (res) => {
           alert('Chỉnh sửa người dùng thành công');
-          this.router.navigate(['/list-users']);
+          this.router.navigate(['/list-users']).then(() => {
+            window.location.reload()
+          })
+
         },
         (err) => {
           console.log(err);
